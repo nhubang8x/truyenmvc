@@ -32,6 +32,11 @@ a:hover {
 .custom {
     display: none;
 }
+.btn-truyen {
+    background: #2198dd;
+    color: #fff;
+    font-weight: 600;
+}
 
 /*CSS*/
 
@@ -121,7 +126,7 @@ a:hover {
     right: -50%;
 }
 .preloader.complete{
-    animation: fadeOut 1s;
+    animation: fadeOutLoad 1s;
     animation-fill-mode: forwards;
 }
 
@@ -136,8 +141,8 @@ a:hover {
     border: 3px solid transparent;
     border-top-color: #e74c3c;
 
-    -webkit-animation: spin 3s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
-    animation: spin 3s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+    -webkit-animation: spinLoad 3s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+    animation: spinLoad 3s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
 }
 
 .loader{
@@ -151,8 +156,8 @@ a:hover {
     border: 3px solid transparent;
     border-top-color: #3498db;
 
-    -webkit-animation: spin 2s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
-    animation: spin 2s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+    -webkit-animation: spinLoad 2s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+    animation: spinLoad 2s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
 
     z-index: 1001;
 }
@@ -168,11 +173,11 @@ a:hover {
     border: 3px solid transparent;
     border-top-color: #f9c922;
 
-    -webkit-animation: spin 1.5s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
-    animation: spin 1.5s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+    -webkit-animation: spinLoad 1.5s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+    animation: spinLoad 1.5s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
 }
 .loader.hidden{
-    animation: fadeOut 1s;
+    animation: fadeOutLoad 1s;
     animation-fill-mode: forwards;
 }
 /*LOADING CSS*/
@@ -1116,3 +1121,92 @@ a:hover {
     left: 5px;
 }
 /*Back To Top*/
+
+/* Login Form CSS */
+.login-block {
+    float: left;
+    width: 100%;
+    padding: 50px 0;
+}
+
+.login-block .container {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 25px 10px 0px #2198dd;
+}
+
+.login-block .carousel-inner {
+    border-radius: 0 10px 10px 0;
+}
+
+.login-block .carousel-caption {
+    text-align: left;
+    left: 5%;
+}
+
+.login-block .login-sec {
+    padding: 15px 30px 50px 30px;
+    position: relative;
+    border: solid thin #2198dd;
+}
+
+.login-block .login-sec .copy-text {
+    position: absolute;
+    width: 80%;
+    bottom: 20px;
+    font-size: 13px;
+    text-align: center;
+}
+
+.login-block .login-sec .copy-text i {
+    color: #FEB58A;
+}
+
+.login-block .login-sec .copy-text a {
+    color: #E36262;
+}
+
+.login-block .login-sec h2 {
+    margin-bottom: 30px;
+    font-weight: 600;
+    color: #2198dd;
+}
+
+.login-block .login-sec h2:after {
+    content: " ";
+    width: 100px;
+    height: 5px;
+    background: #2198dd8a;
+    display: block;
+    margin-top: 20px;
+    border-radius: 3px;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.login-block .banner-text {
+    width: 70%;
+    position: absolute;
+    bottom: 40px;
+    padding-left: 20px;
+}
+
+.login-block .banner-text h2 {
+    color: #fff;
+    font-weight: 600;
+}
+
+.login-block .banner-text h2:after {
+    content: " ";
+    width: 100px;
+    height: 5px;
+    background: #FFF;
+    display: block;
+    margin-top: 20px;
+    border-radius: 3px;
+}
+
+.login-block .banner-text p {
+    color: #fff;
+}
+/* Login Form CSS */

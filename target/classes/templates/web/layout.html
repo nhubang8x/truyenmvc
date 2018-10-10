@@ -171,7 +171,7 @@
                                 <li><a th:href="@{/tai-khoan/}">Hồ Sơ</a></li>
                                 <li><a th:href="@{/tai-khoan/nap-the}">Nạp Coin</a></li>
                                 <li class="dropdown-divider"></li>
-                                <li><a href="javascript:formLogout()">Thoát</a></li>
+                                <li><a th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Thoát</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -214,16 +214,8 @@
                 <section class="user-icon">
                     <i class="truyen-icon icon-user"></i>
                 </section>
-                <form method="post" id="frmLogout">
-                    <input type="hidden" name="${_csrf.parameterName}"
-                           value="${_csrf.token}"/>
-                </form>
-                <script>
-                    function formLogout() {
-                        document.getElementById("frmLogout").submit();
-                    }
-                </script>
-                <a href="javascript:formLogout()" class="user-logout">Thoát</a>
+                
+                <a  th:if="${#request.userPrincipal != null}" th:href="@{/logout}" class="user-logout">Thoát</a>
                 <section class="card-menu">
                     <section class="list-group" style="margin-bottom: 20px;">
                         <section class="list-group-item list-group-item-sidebar">
@@ -321,9 +313,55 @@
     <a href="#" class="truyen-search-box-overlay js-close-search-box"></a>
     </section>
 </th:block>
+<th:block th:fragment="footer">
+    <!-- Footer -->
+    <footer class="truyen-footer">
+        <section id="footer">
+            <section class="container footer-con">
+                <section
+                        class="row text-center text-xs-center text-sm-left text-md-left">
+                    <section class="col-xs-12 col-sm-4 col-md-4">
+                        <h5>Giới thiêu</h5>
+                        <hr class="bg-truyen mb-2 mt-0 d-inline-block mx-auto w-50">
+                        <p th:text="${information.introduce}">
 
+                        </p>
+                    </section>
+                    <section class="col-xs-12 col-sm-4 col-md-4">
+                        <h5>Hỗ trợ</h5>
+                        <hr class="bg-truyen mb-2 mt-0 d-inline-block mx-auto w-50">
+                        <ul class="list-unstyled quick-links">
+                            <li><a href="#" target="_blank"><i
+                                    class="fa fa-mobile-alt mr-3"></i> Ứng dụng Truyện Online</a></li>
+                            <li><a href="#"><i
+                                    class="fa fa-exclamation-triangle mr-3"></i>Báo lỗi ứng dụng</a></li>
+                            <li><a href="#"><i class="fa fa-file mr-3"></i> FAQs</a></li>
+                        </ul>
+                    </section>
+                    <section class="col-xs-12 col-sm-4 col-md-4">
+                        <h5>Liên hệ</h5>
+                        <hr class="bg-truyen mb-2 mt-0 d-inline-block mx-auto w-50">
+                        <ul class="list-unstyled quick-address">
+                            <li><a href="mailto: ${information.email}"><i
+                                    class="fa fa-envelope mr-3"></i>Email: <span
+                                    th:text="${information.email}"></span></a></li>
+                            <li><a><i class="fa fa-mobile-alt mr-3"></i> Phone: <span
+                                    th:text="${information.phone}"></span></a></li>
+                            <li><a href="skype: ${information.skype}"><i
+                                    class="fab fa-skype mr-3"></i>Skype: <span
+                                    th:text="${information.skype}"></span>
+                            </a></li>
+                        </ul>
+                    </section>
+                </section>
+            </section>
+        </section>
+    </footer>
+    <!-- Footer -->
+</th:block>
 
 <th:block th:fragment="endhead">
+
     <!--Back To Top-->
     <a id="backToTop" title="Lên Đầu Trang" href="#"><span>&#10148;</span></a>
     <!--Back To Top-->

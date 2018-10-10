@@ -70,9 +70,19 @@ public class MainController {
 		return "adminPage";
 	}
 
-	@RequestMapping(value = "/login")
+	@RequestMapping(value = "/dang-nhap")
 	public String loginPage(Model model) {
-		return "web/login";
+
+        // Lấy Title Cho Page
+        model.addAttribute("title", "Đăng nhập");
+
+        // Lấy List Category cho Menu
+        model.addAttribute("categorylist", categoryService.getCategoryMenu());
+
+        // Lấy Information của Web
+        model.addAttribute("information", informationService.getWebInfomation());
+
+	    return "web/login";
 	}
 
 	@RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)

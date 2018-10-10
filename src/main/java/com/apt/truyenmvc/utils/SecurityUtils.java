@@ -7,7 +7,7 @@ package com.apt.truyenmvc.utils;
 public class SecurityUtils {
 
     public static final String[] PERMIT_ALL_LINK ={ "/",
-            "/login",
+            "/dang-nhap",
             "/logout",
             "/api/load",
             "/api/load1",
