@@ -1,6 +1,7 @@
 package com.apt.truyenmvc.entity.custom;
 
 import com.apt.truyenmvc.entity.User;
+import com.apt.truyenmvc.utils.ConstantsUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -44,7 +45,7 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return user.getUStatus() == ConstantsUtils.STATUS_ACTIVED ? true : false;
     }
 
     @Override

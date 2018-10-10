@@ -35,12 +35,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		if (user == null) {
 			System.out.println("Không tìm thấy user:" + userName);
 			throw new UsernameNotFoundException("User " + userName + " was not found in the database");
-		} else {
-			System.out.println("Tim thấy user: " + user.getUEmail());
 		}
+
+		//Lấy List Quyền
 		List<Urole> listRole = this.uroleService.getListRole(user);
 
-		System.out.println("Size" + listRole.size());
 		List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
 		if (listRole != null) {
 			for (Urole urole : listRole) {
