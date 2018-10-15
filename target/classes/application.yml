@@ -46,6 +46,14 @@ spring:
     multipart:
       max-file-size: 20MB
       max-request-size: 20MB
+  resources:
+    chain:
+      strategy:
+        content:
+          enabled: true
+          paths: /**
+  messages:
+    encoding: UTF-8
 
 jasypt:
   encryptor:

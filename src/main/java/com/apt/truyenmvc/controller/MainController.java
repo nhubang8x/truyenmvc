@@ -3,8 +3,6 @@ package com.apt.truyenmvc.controller;
 import java.security.Principal;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.apt.truyenmvc.entity.custom.MyUserDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,9 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.apt.truyenmvc.entity.Urole;
 import com.apt.truyenmvc.entity.User;
@@ -24,7 +20,6 @@ import com.apt.truyenmvc.service.CategoryService;
 import com.apt.truyenmvc.service.InformationService;
 import com.apt.truyenmvc.service.UroleService;
 import com.apt.truyenmvc.service.UserService;
-import com.apt.truyenmvc.utils.ImageUtils;
 
 @Controller
 @SessionAttributes("uaccount")
@@ -55,7 +50,7 @@ public class MainController {
 		model.addAttribute("title", "Welcome");
 		model.addAttribute("uaccount", user);
 		model.addAttribute("rolelist", list);
-		return "web/index";
+		return "trangchu";
 	}
 
 	@RequestMapping(value = "/admin")
@@ -68,21 +63,6 @@ public class MainController {
 //		model.addAttribute("userInfo", userInfo);
 
 		return "adminPage";
-	}
-
-	@RequestMapping(value = "/dang-nhap")
-	public String loginPage(Model model) {
-
-        // Lấy Title Cho Page
-        model.addAttribute("title", "Đăng nhập");
-
-        // Lấy List Category cho Menu
-        model.addAttribute("categorylist", categoryService.getCategoryMenu());
-
-        // Lấy Information của Web
-        model.addAttribute("information", informationService.getWebInfomation());
-
-	    return "web/login";
 	}
 
 	@RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)

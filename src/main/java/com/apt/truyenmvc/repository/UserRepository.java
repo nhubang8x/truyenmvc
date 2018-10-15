@@ -29,4 +29,8 @@ public interface UserRepository extends JpaRepository<User, Long>{
 			nativeQuery = true)
 	public Page<TopConverter> getTopConverter(@Param("chStatus") Integer chStatus, 
 			@Param("uStatus") Integer uStatus,Pageable pageable);
+
+	public boolean existsUserByUEmail(String uEmail);
+
+	public boolean existsUserByUName(String uName);
 }

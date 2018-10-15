@@ -30,5 +30,7 @@ public class ConstantsUtils {
 	public static int RANK_SIZE = 10;
 	
 	public static int ROLE_CONVERTER = 2;
+
+	public static String AVATAR_DEFAULT = "https://res.cloudinary.com/thang1988/image/upload/v1539181299/logo.png";
 	
 }

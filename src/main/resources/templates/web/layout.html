@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="head">
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -57,6 +59,12 @@
     <!-- JQueyUI CSS for Auto Complete -->
     <link rel="stylesheet"
           th:href="@{https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css}">
+
+    <!--jQuery Validation JavaScript-->
+    <script type="text/javascript"
+            th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js}"
+            integrity="sha256-yazfaIh2SXu8rPenyD2f36pKgrkv5XT+DQCDpZ/eDao=" crossorigin="anonymous"></script>
+
 </head>
 <body>
 <th:block th:fragment="loading">
@@ -165,7 +173,7 @@
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">
                                 <i class="truyen-icon icon-user"></i>
-                                <span class="truyen-login-title" th:text="${#authentication.name}"></span>
+                                <span class="truyen-login-title" sec:authentication="name"></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a th:href="@{/tai-khoan/}">Hồ Sơ</a></li>
@@ -215,7 +223,7 @@
                     <i class="truyen-icon icon-user"></i>
                 </section>
 
-                <a  th:if="${#request.userPrincipal != null}" th:href="@{/logout}" class="user-logout">Thoát</a>
+                <a th:if="${#request.userPrincipal != null}" th:href="@{/logout}" class="user-logout">Thoát</a>
                 <section class="card-menu">
                     <section class="list-group" style="margin-bottom: 20px;">
                         <section class="list-group-item list-group-item-sidebar">
@@ -331,24 +339,26 @@
                         <h5>Hỗ trợ</h5>
                         <hr class="bg-truyen mb-2 mt-0 d-inline-block mx-auto w-50">
                         <ul class="list-unstyled quick-links">
-                            <li><a href="#" target="_blank"><i
-                                    class="fa fa-mobile-alt mr-3"></i> Ứng dụng Truyện Online</a></li>
-                            <li><a href="#"><i
-                                    class="fa fa-exclamation-triangle mr-3"></i>Báo lỗi ứng dụng</a></li>
-                            <li><a href="#"><i class="fa fa-file mr-3"></i> FAQs</a></li>
+                            <li><a href="#" target="_blank"><span class="block-list-icon">
+                                <i class="truyen-icon icon-mobile mr-3"></i></span> Ứng dụng Truyện Online</a></li>
+                            <li><a href="#"><span class="block-list-icon"><i
+                                    class="truyen-icon icon-warning mr-3"></i></span>Báo lỗi ứng dụng</a></li>
+                            <li><a href="#"><span class="block-list-icon"><i
+                                    class="truyen-icon icon-faq mr-3"></i></span> FAQs</a></li>
                         </ul>
                     </section>
                     <section class="col-xs-12 col-sm-4 col-md-4">
                         <h5>Liên hệ</h5>
                         <hr class="bg-truyen mb-2 mt-0 d-inline-block mx-auto w-50">
-                        <ul class="list-unstyled quick-address">
-                            <li><a href="mailto: ${information.email}"><i
-                                    class="fa fa-envelope mr-3"></i>Email: <span
+                        <ul class="list-unstyled quick-links">
+                            <li><a href="mailto: ${information.email}"><span class="block-list-icon"><i
+                                    class="truyen-icon icon-email mr-3"></i></span>Email: <span
                                     th:text="${information.email}"></span></a></li>
-                            <li><a><i class="fa fa-mobile-alt mr-3"></i> Phone: <span
-                                    th:text="${information.phone}"></span></a></li>
-                            <li><a href="skype: ${information.skype}"><i
-                                    class="fab fa-skype mr-3"></i>Skype: <span
+                            <li><a><span class="block-list-icon"><i class="truyen-icon icon-mobile mr-3"></i></span>
+                                Phone: <span
+                                        th:text="${information.phone}"></span></a></li>
+                            <li><a href="skype: ${information.skype}"><span class="block-list-icon"><i
+                                    class="truyen-icon icon-skype mr-3"></i></span>Skype: <span
                                     th:text="${information.skype}"></span>
                             </a></li>
                         </ul>

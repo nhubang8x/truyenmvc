@@ -2,30 +2,20 @@ package com.apt.truyenmvc.controller.web;
 
 import java.security.Principal;
 import java.util.*;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import com.apt.truyenmvc.entity.Chapter;
 import com.apt.truyenmvc.entity.User;
 import com.apt.truyenmvc.entity.custom.MyUserDetails;
 import com.apt.truyenmvc.service.*;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.apt.truyenmvc.entity.Story;
 import com.apt.truyenmvc.entity.inf.NewStory;
@@ -33,9 +23,7 @@ import com.apt.truyenmvc.entity.inf.TopConverter;
 import com.apt.truyenmvc.entity.inf.TopStory;
 import com.apt.truyenmvc.utils.ConstantsUtils;
 import com.apt.truyenmvc.utils.DateUtils;
-import org.springframework.web.util.WebUtils;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -76,6 +64,7 @@ public class HomeController {
 
 	@Autowired
     private ChapterService chapterService;
+
 	private void getMenuAndInfo(Model model, String title) {
 
 	    // Lấy Title Cho Page
@@ -92,9 +81,10 @@ public class HomeController {
 	public String homePage(Model model,Principal principal, HttpServletRequest request, HttpServletResponse response) {
 	    // Kiểm tra người dùng đã đăng nhập chưa
 		if(principal !=null){
+            System.out.println("Đã đăng nhập");
             // Lấy Danh sách truyện đang đọc của người dùng
             MyUserDetails loginedUser = (MyUserDetails) ((Authentication) principal).getPrincipal();
-            User user = loginedUser.getUser();
+            User user= loginedUser.getUser();
             List<Chapter> chapterListFavorites = chapterService.getAllChapterFavoritesByUser(user.getUID());
             model.addAttribute("listFavorites",chapterListFavorites);
         }else{
@@ -136,6 +126,15 @@ public class HomeController {
 		model.addAttribute("storyCompleted",topCompleted);
 		
 		getMenuAndInfo(model, "Truyện Online | Vietphrase");
-		return "web/index";
+		return "web/trangchu";
 	}
+
+    @RequestMapping(value = "/dang-nhap")
+    public String loginPage(Model model) {
+
+        getMenuAndInfo(model, "Đăng nhập | Truyện Online | Vietphrase");
+
+        return "web/dangnhap";
+    }
+
 }

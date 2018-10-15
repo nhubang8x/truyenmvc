@@ -12,6 +12,51 @@ body {
     color: #333;
 }
 
+@media only screen and (min-width: 992px) {
+    .container {
+        padding: 0
+    }
+}
+
+body {
+    background-image: url(images/footer-bg.png);
+    background-repeat: no-repeat;
+    background-position: bottom right
+}
+
+@media only screen and (min-width: 992px) {
+    .truyen-main .container {
+        overflow-x: hidden
+    }
+
+    .page-login .truyen-main .container {
+        overflow-x: inherit
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    body {
+        -moz-background-size: 100% auto;
+        -o-background-size: 100% auto;
+        background-size: 100% auto
+    }
+}
+
+@media only screen and (min-width: 769px) {
+    .page-wrapper {
+        background-image: url(images/body-bg-tl3.jpg);
+        background-repeat: no-repeat;
+        background-position: center top;
+        -moz-background-size: 100% auto;
+        -o-background-size: 100% auto;
+        background-size: 100% auto
+    }
+
+    .truyen-main {
+        margin-top: 250px
+    }
+}
+
 a {
     color: #2198dd;
 }
@@ -21,31 +66,137 @@ a:hover {
     color: #2198dd;
 }
 
-.btn.focus, .btn:focus{
+.btn.focus, .btn:focus {
     box-shadow: none !important;
+}
+
+.btn-xs {
+    padding: 1px 5px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
 }
 
 .bg-truyen {
     background-color: #2198dd;
 }
 
-.custom {
-    display: none;
-}
 .btn-truyen {
     background: #2198dd;
     color: #fff;
     font-weight: 600;
 }
 
+.btn-truyen.focus, .btn-truyen:focus {
+    box-shadow: 0 0 0 0.2rem rgba(33, 140, 209, 0.5);
+}
+
+.btn-truyen:hover {
+    color: #fff;
+    background-color: #2198dd;
+    border-color: #2198dd;
+}
+
+.custom {
+    display: none;
+}
+
+.page-read {
+    background-image: none;
+}
+
+.page-read .page-wrapper {
+    background-image: none;
+}
+
+.page-read .truyen-main {
+    margin-top: 0;
+}
+
 /*CSS*/
 
 /*CUSTOM BOOTSTRAP*/
-.navbar-right .dropdown-menu{
+.invalid-feedback {
+    font-size: 100% !important;
+}
+@media ( min-width: 768px) {
+    .container {
+        max-width: 750px;
+    }
+}
+
+@media ( min-width: 992px) {
+    .container {
+        max-width: 970px;
+    }
+}
+
+@media ( min-width: 1200px) {
+    .container {
+        max-width: 1170px;
+    }
+}
+
+.card-header-custom:not(.collapsed ) span font {
+    display: none
+}
+
+.card-header-custom.collapsed span b {
+    display: none
+}
+
+.card-custom {
+    margin-bottom: 1em;
+    border-radius: 0;
+}
+
+.navbar-right .dropdown-menu {
     position: absolute !important;
     right: 0 !important;
     left: auto !important;
 }
+
+.dropdown-menu > li > a {
+    display: block;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.28571429;
+    white-space: nowrap;
+    padding: 10px 20px;
+    color: #333333;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    text-decoration: none;
+    color: #262626;
+    background-color: #f5f5f5;
+}
+
+.featured-content {
+    background-color: #fff;
+    padding: 15px;
+}
+
+@media only screen and (max-width: 541px) {
+    .featured-content {
+        padding: 0;
+    }
+}
+
+.table .thead-truyen th {
+    color: #fff;
+    background-color: #6b9876;
+    border-color: #6b9876;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.dropdown-toggle::after {
+    margin-top: 8%;
+}
+
 /*CUSTOM BOOTSTRAP*/
 
 /*ICON CSS*/
@@ -87,10 +238,41 @@ a:hover {
     width: 10px;
     height: 17px;
 }
+
+.truyen-icon.icon-mobile {
+    background-image: url(images/icon-phone.png);
+    width: 14px;
+    height: 24px
+}
+
+.truyen-icon.icon-warning {
+    background-image: url(images/icon-warning.png);
+    width: 22px;
+    height: 24px
+}
+
+.truyen-icon.icon-faq {
+    background-image: url(images/icon-upload.png);
+    width: 24px;
+    height: 24px
+}
+
+.truyen-icon.icon-email {
+    background-image: url(images/icon-email.png);
+    width: 24px;
+    height: 16px
+}
+
+.truyen-icon.icon-skype {
+    background-image: url(images/icon-skype.png);
+    width: 24px;
+    height: 24px
+}
+
 /*ICON CSS*/
 
 /*LOADING CSS*/
-.preloader{
+.preloader {
     position: fixed;
     top: 0;
     left: 0;
@@ -99,7 +281,8 @@ a:hover {
     transition: 1s;
     z-index: 999;
 }
-.preloader:before{
+
+.preloader:before {
     content: '';
     position: absolute;
     left: 0;
@@ -109,10 +292,12 @@ a:hover {
     background: #000000;
     transition: 1s;
 }
-.preloader.complete:before{
+
+.preloader.complete:before {
     left: -50%;
 }
-.preloader:after{
+
+.preloader:after {
     content: '';
     position: absolute;
     right: 0;
@@ -122,10 +307,12 @@ a:hover {
     background: #000000;
     transition: 1s;
 }
-.preloader.complete:after{
+
+.preloader.complete:after {
     right: -50%;
 }
-.preloader.complete{
+
+.preloader.complete {
     animation: fadeOutLoad 1s;
     animation-fill-mode: forwards;
 }
@@ -145,7 +332,7 @@ a:hover {
     animation: spinLoad 3s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
 }
 
-.loader{
+.loader {
     position: relative;
     left: 50%;
     top: 50%;
@@ -176,10 +363,12 @@ a:hover {
     -webkit-animation: spinLoad 1.5s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
     animation: spinLoad 1.5s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
 }
-.loader.hidden{
+
+.loader.hidden {
     animation: fadeOutLoad 1s;
     animation-fill-mode: forwards;
 }
+
 /*LOADING CSS*/
 
 /*Navbar Custom*/
@@ -205,7 +394,7 @@ a:hover {
     background-color: #2198dd;
 }
 
-@media only screen and (max-width:991px) {
+@media only screen and (max-width: 991px) {
     .navbar-truyen {
         height: 60px;
         min-height: 60px
@@ -226,11 +415,12 @@ a:hover {
     content: ''
 }
 
-@media only screen and (max-width:767px) {
+@media only screen and (max-width: 767px) {
     .navbar-truyen {
         height: 44px;
         min-height: 44px
     }
+
     .navbar-truyen:after {
         background: 0 0
     }
@@ -240,28 +430,28 @@ a:hover {
     margin: 0
 }
 
-@media only screen and (max-width:991px) {
+@media only screen and (max-width: 991px) {
     .navbar-truyen .navbar-header {
         height: 60px;
         min-height: 60px
     }
 }
 
-@media only screen and (max-width:767px) {
+@media only screen and (max-width: 767px) {
     .navbar-truyen .navbar-header {
         height: 50px;
         min-height: 50px
     }
 }
 
-@media only screen and (max-width:991px) {
+@media only screen and (max-width: 991px) {
     .navbar-truyen .navbar-header {
         text-align: center;
         position: relative
     }
 }
 
-@media only screen and (min-width:992px) {
+@media only screen and (min-width: 992px) {
     .navbar-truyen .navbar-header {
         padding-left: 100px;
         position: relative
@@ -283,7 +473,7 @@ a:hover {
     box-shadow: 0 8px 10px 0 rgba(0, 0, 0, .12)
 }
 
-@media only screen and (max-width:991px) {
+@media only screen and (max-width: 991px) {
     .navbar-truyen .navbar-header .navbar-logo {
         float: none;
         top: 8px;
@@ -293,14 +483,14 @@ a:hover {
     }
 }
 
-@media only screen and (max-width:767px) {
+@media only screen and (max-width: 767px) {
     .navbar-truyen .navbar-header .navbar-logo {
         height: 70px;
         width: 70px
     }
 }
 
-@media only screen and (min-width:992px) {
+@media only screen and (min-width: 992px) {
     .navbar-truyen .navbar-header .navbar-logo {
         position: absolute;
         left: 0
@@ -327,7 +517,7 @@ a:hover {
     margin: auto
 }
 
-@media only screen and (max-width:767px) {
+@media only screen and (max-width: 767px) {
     .navbar-truyen .navbar-search-btn {
         top: 0
     }
@@ -339,7 +529,7 @@ a:hover {
     position: relative
 }
 
-@media only screen and (max-width:991px) {
+@media only screen and (max-width: 991px) {
     .navbar-truyen .navbar-category {
         position: absolute;
         top: 0;
@@ -350,7 +540,7 @@ a:hover {
     }
 }
 
-@media only screen and (max-width:767px) {
+@media only screen and (max-width: 767px) {
     .navbar-truyen .navbar-category {
         top: 10px
     }
@@ -377,17 +567,17 @@ a:hover {
     transition: all .2s ease-in-out
 }
 
-@media only screen and (max-width:991px) {
+@media only screen and (max-width: 991px) {
     .navbar-truyen .navbar-category .navbar-category-list {
         display: none
     }
 }
 
-.navbar-truyen .navbar-category .navbar-category-list>li {
+.navbar-truyen .navbar-category .navbar-category-list > li {
     list-style: none
 }
 
-.navbar-truyen .navbar-category .navbar-category-list>li>a {
+.navbar-truyen .navbar-category .navbar-category-list > li > a {
     display: block;
     overflow: hidden;
     -o-text-overflow: ellipsis;
@@ -404,11 +594,11 @@ a:hover {
     text-decoration: none
 }
 
-.navbar-truyen .navbar-category .navbar-category-list>li>a:hover {
+.navbar-truyen .navbar-category .navbar-category-list > li > a:hover {
     background-color: #097bb3;
 }
 
-@media only screen and (min-width:992px) {
+@media only screen and (min-width: 992px) {
     .navbar-truyen .navbar-category:hover .navbar-category-list {
         visibility: visible;
         opacity: 1
@@ -427,7 +617,7 @@ a:hover {
     transition: all .2s ease-in-out
 }
 
-@media only screen and (min-width:768px) {
+@media only screen and (min-width: 768px) {
     .navbar-truyen .navbar-category .navbar-category-btn {
         background-color: #2198dd;
         height: 32px;
@@ -435,7 +625,7 @@ a:hover {
     }
 }
 
-@media only screen and (max-width:991px) {
+@media only screen and (max-width: 991px) {
     .navbar-truyen .navbar-category .navbar-category-btn {
         padding: 0;
         background-color: transparent
@@ -457,15 +647,14 @@ a:hover {
     width: 18px
 }
 
-@media only screen and (max-width:991px) {
+@media only screen and (max-width: 991px) {
     .navbar-truyen .navbar-category .navbar-category-btn .lines {
         position: relative;
         left: 0
     }
 }
 
-.navbar-truyen .navbar-category .navbar-category-btn .lines .line
-{
+.navbar-truyen .navbar-category .navbar-category-btn .lines .line {
     display: block;
     width: 100%;
     height: 1px;
@@ -474,8 +663,7 @@ a:hover {
     float: left
 }
 
-.navbar-truyen .navbar-category .navbar-category-btn .lines .line:last-child
-{
+.navbar-truyen .navbar-category .navbar-category-btn .lines .line:last-child {
     margin-bottom: 0
 }
 
@@ -483,15 +671,15 @@ a:hover {
     margin-top: 10px
 }
 
-.navbar-truyen .navbar-nav>li {
+.navbar-truyen .navbar-nav > li {
     padding: 0 12px
 }
 
-.navbar-truyen .navbar-nav>li .dropdown-menu {
+.navbar-truyen .navbar-nav > li .dropdown-menu {
     min-width: 200px
 }
 
-.navbar-truyen .navbar-nav>li .dropdown-menu:after {
+.navbar-truyen .navbar-nav > li .dropdown-menu:after {
     content: '';
     border: 8px solid transparent;
     position: absolute;
@@ -500,7 +688,7 @@ a:hover {
     right: 8px
 }
 
-.navbar-truyen .navbar-nav>li>a {
+.navbar-truyen .navbar-nav > li > a {
     -webkit-transition: all .2s ease-in-out;
     -o-transition: all .2s ease-in-out;
     -moz-transition: all .2s ease-in-out;
@@ -512,22 +700,22 @@ a:hover {
     color: inherit !important
 }
 
-.navbar-truyen .navbar-nav>li>a .truyen-icon {
+.navbar-truyen .navbar-nav > li > a .truyen-icon {
     float: left;
     margin-right: 10px
 }
 
-.navbar-truyen .navbar-nav>li>a:hover {
+.navbar-truyen .navbar-nav > li > a:hover {
     border-bottom-color: #fff;
     opacity: 1
 }
 
-.navbar-truyen .navbar-nav>li.active>a {
+.navbar-truyen .navbar-nav > li.active > a {
     opacity: 1;
     border-bottom-color: #fff
 }
 
-.navbar-truyen .navbar-right>li>a {
+.navbar-truyen .navbar-right > li > a {
     border-bottom: 2px solid transparent !important
 }
 
@@ -663,27 +851,29 @@ a:hover {
     opacity: 1
 }
 
-@media only screen and (min-width:1200px) {
+@media only screen and (min-width: 1200px) {
     .navbar-truyen .search-block .search-panel {
         visibility: visible;
         opacity: 1;
         width: 240px
     }
+
     .navbar-truyen .search-block .search-panel .form-control {
         opacity: 1
     }
+
     .navbar-truyen .search-block .search-panel .btn-search {
         opacity: 1
     }
 }
 
-@media only screen and (min-width:992px) {
+@media only screen and (min-width: 992px) {
     .truyen-sidebar {
         display: none
     }
 }
 
-@media only screen and (max-width:991px) {
+@media only screen and (max-width: 991px) {
     .truyen-sidebar-overlay {
         position: fixed;
         z-index: 99;
@@ -694,6 +884,7 @@ a:hover {
         right: 0;
         display: none
     }
+
     .truyen-sidebar {
         position: absolute;
         z-index: 100;
@@ -724,20 +915,23 @@ a:hover {
         margin: 0;
         padding: 0
     }
+
     .truyen-sidebar .list-group-item-sidebar:hover,
-    .truyen-sidebar .list-group-item-sidebar:focus{
+    .truyen-sidebar .list-group-item-sidebar:focus {
         background: #2198dd;
     }
-    .truyen-sidebar .list-group-item-sidebar>a:hover,
-    .truyen-sidebar .list-group-item-sidebar>a:focus{
+
+    .truyen-sidebar .list-group-item-sidebar > a:hover,
+    .truyen-sidebar .list-group-item-sidebar > a:focus {
         color: #ffffff;
     }
-    .truyen-sidebar .list-group-item-sidebar>a:hover .truyen-icon.icon-next,
-    .truyen-sidebar .list-group-item-sidebar>a:focus .truyen-icon.icon-next{
+
+    .truyen-sidebar .list-group-item-sidebar > a:hover .truyen-icon.icon-next,
+    .truyen-sidebar .list-group-item-sidebar > a:focus .truyen-icon.icon-next {
         background-image: url(images/icon-white-next.png);
     }
 
-    .truyen-sidebar .list-group-item-sidebar>a {
+    .truyen-sidebar .list-group-item-sidebar > a {
         padding: 10px 40px 10px 15px;
         line-height: 24px;
         display: block;
@@ -747,12 +941,12 @@ a:hover {
         position: relative
     }
 
-    .truyen-sidebar .list-group-item-sidebar:last-child>a {
+    .truyen-sidebar .list-group-item-sidebar:last-child > a {
         border-bottom: 0
     }
 
-    .truyen-sidebar .list-group-item-sidebar>a .icon-next,
-    .truyen-sidebar .list-group-item-sidebar>a .icon-white-next {
+    .truyen-sidebar .list-group-item-sidebar > a .icon-next,
+    .truyen-sidebar .list-group-item-sidebar > a .icon-white-next {
         position: absolute;
         top: 0;
         bottom: 0;
@@ -773,16 +967,18 @@ a:hover {
         box-shadow: 1px 0 3px rgba(0, 0, 0, .25);
         -webkit-overflow-scrolling: touch
     }
+
     .truyen-sidebar .sidebar-header {
         background-color: #2198dd;
         padding: 15px 15px 0;
         position: relative
     }
+
     .truyen-sidebar .sidebar-header .truyen-sidebar-user-title {
         border: 0 !important
     }
-    .truyen-sidebar .sidebar-header .truyen-sidebar-user-title>.truyen-icon
-    {
+
+    .truyen-sidebar .sidebar-header .truyen-sidebar-user-title > .truyen-icon {
         -webkit-transform: rotate(90deg);
         -moz-transform: rotate(90deg);
         -ms-transform: rotate(90deg);
@@ -793,28 +989,33 @@ a:hover {
         -moz-transition: all .2s ease-in-out;
         transition: all .2s ease-in-out
     }
-    .truyen-sidebar .sidebar-header .truyen-sidebar-user-title.collapsed>.truyen-icon
-    {
+
+    .truyen-sidebar .sidebar-header .truyen-sidebar-user-title.collapsed > .truyen-icon {
         -webkit-transform: rotate(0);
         -moz-transform: rotate(0);
         -ms-transform: rotate(0);
         -o-transform: rotate(0);
         transform: rotate(0)
     }
-    .truyen-sidebar .sidebar-header .list-group-item-sidebar>a {
+
+    .truyen-sidebar .sidebar-header .list-group-item-sidebar > a {
         border-color: rgba(238, 238, 238, .2)
     }
-    .truyen-sidebar .sidebar-header>.card-menu {
+
+    .truyen-sidebar .sidebar-header > .card-menu {
         margin-left: -15px;
         margin-right: -15px
     }
+
     .truyen-sidebar .sidebar-header .list-group-item {
         background-color: transparent;
         border: 0
     }
-    .truyen-sidebar .sidebar-header .list-group-item>a {
+
+    .truyen-sidebar .sidebar-header .list-group-item > a {
         color: #fff
     }
+
     .truyen-sidebar .sidebar-header .user-logout {
         position: absolute;
         top: 15px;
@@ -827,6 +1028,7 @@ a:hover {
         -moz-border-radius: 5px;
         border-radius: 5px
     }
+
     .truyen-sidebar .sidebar-close {
         display: block;
         position: absolute;
@@ -842,6 +1044,7 @@ a:hover {
         outline: 0;
         opacity: 0
     }
+
     .truyen-sidebar .sidebar-close::before {
         content: "";
         position: absolute;
@@ -865,6 +1068,7 @@ a:hover {
         -o-transform-origin: center;
         transform-origin: center
     }
+
     .truyen-sidebar .sidebar-close::after {
         content: "";
         position: absolute;
@@ -888,10 +1092,12 @@ a:hover {
         -o-transform-origin: center;
         transform-origin: center
     }
+
     body.open-sidebar {
         height: 100%;
         overflow: hidden
     }
+
     body.open-sidebar .truyen-sidebar {
         -webkit-transform: translate(0, 0);
         -ms-transform: translate(0, 0);
@@ -899,13 +1105,16 @@ a:hover {
         -moz-transform: translate(0, 0);
         transform: translate(0, 0)
     }
+
     body.open-sidebar .truyen-sidebar .sidebar-container {
         pointer-events: all
     }
+
     body.open-sidebar .truyen-sidebar .sidebar-close {
         opacity: 1;
         pointer-events: all
     }
+
     body.open-sidebar .truyen-sidebar-overlay {
         display: block;
         pointer-events: all
@@ -917,31 +1126,31 @@ a:hover {
     padding: 0;
 }
 
-@media ( max-width : 767px) {
+@media ( max-width: 767px) {
     .hidden-xs {
         display: none !important;
     }
 }
 
-@media ( max-width : 991px) and (min-width: 768px) {
+@media ( max-width: 991px) and (min-width: 768px) {
     .hidden-sm {
         display: none !important;
     }
 }
 
-@media ( min-width : 992px) {
-    .container>.navbar-custom, .container-fluid>.navbar-custom {
+@media ( min-width: 992px) {
+    .container > .navbar-custom, .container-fluid > .navbar-custom {
         margin-right: 0;
         margin-left: 0;
     }
 }
 
-.container>.navbar-custom, .container-fluid>.navbar-custom {
+.container > .navbar-custom, .container-fluid > .navbar-custom {
     margin-right: -15px;
     margin-left: -15px;
 }
 
-@media ( min-width : 992px) {
+@media ( min-width: 992px) {
     .navbar-custom {
         width: auto;
         border-top: 0;
@@ -949,12 +1158,14 @@ a:hover {
         -moz-box-shadow: none;
         box-shadow: none;
     }
+
     .navbar-custom.custom {
         display: block !important;
         height: auto !important;
         padding-bottom: 0;
         overflow: visible !important;
     }
+
     .navbar-custom.in {
         overflow-y: visible;
     }
@@ -976,20 +1187,20 @@ a:hover {
     display: table;
 }
 
-@media ( min-width : 992px) {
+@media ( min-width: 992px) {
     .navbar-right {
         float: right !important;
         margin-right: -15px;
     }
 }
 
-@media only screen and (min-width:992px) {
+@media only screen and (min-width: 992px) {
     .truyen-search-box {
         display: none
     }
 }
 
-@media only screen and (max-width:1199px) {
+@media only screen and (max-width: 1199px) {
     .truyen-search-box-overlay {
         position: fixed;
         z-index: 99;
@@ -1000,6 +1211,7 @@ a:hover {
         right: 0;
         display: none
     }
+
     .truyen-search-box {
         position: absolute;
         top: 0;
@@ -1019,6 +1231,7 @@ a:hover {
         transition: all .2s ease-in-out;
         opacity: 0
     }
+
     .truyen-search-box:after {
         position: absolute;
         background: url(images/nav-bg.png) repeat-x center;
@@ -1032,12 +1245,14 @@ a:hover {
         width: 100%;
         content: ' '
     }
+
     .truyen-search-box .search-box-mobile {
         height: 44px;
         position: relative;
         padding-right: 50px;
         background-color: #fff
     }
+
     .truyen-search-box .search-box-mobile .form-control {
         border: 0;
         -webkit-box-shadow: none;
@@ -1046,6 +1261,7 @@ a:hover {
         height: 100%;
         padding: 5px 15px
     }
+
     .truyen-search-box .search-box-mobile .search-box-mobile-btn {
         position: absolute;
         right: 15px;
@@ -1059,10 +1275,12 @@ a:hover {
         outline: 0;
         padding: 0
     }
+
     body.open-search-box {
         height: 100%;
         overflow: hidden
     }
+
     body.open-search-box .truyen-search-box {
         -webkit-transform: translate(0, 0);
         -ms-transform: translate(0, 0);
@@ -1072,12 +1290,125 @@ a:hover {
         pointer-events: all;
         opacity: 1
     }
+
     body.open-search-box .truyen-search-box-overlay {
         display: block;
         pointer-events: all
     }
 }
+
 /*Navbar Custom*/
+
+/* FOOTER CSS */
+.truyen-footer {
+    border-top: 4px solid #2198dd;
+    margin-bottom: 100px;
+}
+
+#footer {
+    padding-top: 20px;
+}
+
+section .section-title {
+    text-align: center;
+    color: #218cd1;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+
+.footer-con {
+    padding-top: 20px;
+}
+
+#footer h5 {
+    padding-left: 10px;
+    border-left: 3px solid #2198dd;
+    padding-bottom: 6px;
+    margin: 0;
+    color: #2198dd;
+}
+
+#footer li a {
+    color: #000;
+    text-decoration: none !important;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+
+#footer p {
+    font-size: 0.9rem;
+    text-align: justify;
+}
+
+#footer li a .block-list-icon {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    height: 24px;
+    width: 24px;
+    margin: auto;
+    text-align: center;
+}
+
+#footer ul.quick-links li a {
+    color: #333;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    line-height: 24px;
+    padding: 6px 0 6px 34px;
+    position: relative;
+    display: block;
+    text-decoration: none;
+}
+
+#footer ul.quick-links li {
+    padding: 3px 0;
+    -webkit-transition: .5s all ease;
+    -moz-transition: .5s all ease;
+    transition: .5s all ease;
+}
+
+#footer ul.quick-links li a:hover {
+    color: #2198dd;
+}
+
+#footer ul.quick-links li:hover {
+    padding: 3px 0;
+    margin-left: 5px;
+    font-weight: 700;
+}
+
+#footer ul.quick-links li a i {
+    margin-right: 5px;
+}
+
+#footer ul.quick-links li:hover a i {
+    font-weight: 700;
+}
+
+@media ( max-width: 767px) {
+    #footer h5 {
+        padding-left: 0;
+        border-left: transparent;
+        padding-bottom: 0px;
+        margin-bottom: 10px;
+    }
+}
+
+@media ( max-width: 575px) {
+    #footer {
+        padding-top: 20px;
+    }
+
+    #footer ul {
+        text-align: left;
+    }
+}
+
+/* FOOTER CSS */
 
 /*Back To Top*/
 #backToTop {
@@ -1100,11 +1431,13 @@ a:hover {
     font-size: 30px;
     text-decoration: none;
 }
+
 #backToTop:hover {
     background-color: #199edf;
 }
-#backToTop span{
-    color:  #ffffff;
+
+#backToTop span {
+    color: #ffffff;
     margin: 0;
     position: relative;
     left: 0;
@@ -1116,13 +1449,23 @@ a:hover {
     -o-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
-#backToTop:hover span{
+
+#backToTop:hover span {
     color: #DDF;
     left: 5px;
 }
+
 /*Back To Top*/
 
 /* Login Form CSS */
+.page-login .truyen-main {
+    margin-top: 15px;
+}
+
+.page-login .page-wrapper {
+    background-image: none;
+}
+
 .login-block {
     float: left;
     width: 100%;
@@ -1209,4 +1552,5 @@ a:hover {
 .login-block .banner-text p {
     color: #fff;
 }
+
 /* Login Form CSS */

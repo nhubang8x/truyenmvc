@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
 <head>
     <title th:text="${title}"></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -10,58 +11,42 @@
 <th:block th:include="web/layout :: loading"></th:block>
 <section class="page-wrapper">
     <th:block th:include="web/layout :: navbar"></th:block>
+    x`
     <section class="truyen-main">
-        <script type="text/javascript" sec:authorize="isAuthenticated()" `>
-            window.location = '[[@{/}]]';
-        </script>
         <div id="content" class="container">
             <div class="row">
                 <section class="login-block">
                     <section class="container">
                         <section class="row truyen-login-row">
                             <section class="col-md-4 login-sec">
-                                <h2 class="text-center text-uppercase">Đăng nhập</h2>
-                                <form id="signupForm" class="login-form" name='loginForm'
-                                      th:action="@{j_spring_security_check}" method='POST'>
-                                    <section class="form-group"
-                                             th:if="${param.error} and ${session}"
-                                             th:with="errorMsg=${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">
+                                <h2 class="text-center text-uppercase">Quên mật khẩu</h2>
+                                <form id="rePassword" action="#" method="POST" class="form-horizontal"
+                                      th:object="${newforgot}" th:action="@{/quen-mk}">
+                                    <section class="form-group" th:if="${error != null}">
                                         <div class="alert alert-danger" role="alert"
-                                             th:text="${errorMsg}"></div>
-                                    </section>
-                                    <section class="form-group" th:if="${success != null}">
-                                        <div class="alert alert-success" role="alert"
-                                             th:text="${success}"></div>
+                                             th:text="${error}"></div>
                                     </section>
                                     <section class="form-group">
-                                        <label for="exampleInputEmail1" class="text-uppercase">Tài
-                                            khoản</label>
-                                        <input type="text" class="form-control" name="username"
-                                               id="username" placeholder="" autofocus="autofocus">
+                                        <label class="text-uppercase">Tài khoản: </label>
+                                        <input type="text" autofocus="autofocus" id="username"
+                                               th:class="${#fields.hasErrors('username')}? 'form-control is-invalid' : 'form-control'"
+                                               th:field="*{username}"/>
+                                        <span th:if="${#fields.hasErrors('username')}"
+                                              th:errors="*{username}" class="error invalid-feedback"></span>
                                     </section>
                                     <section class="form-group">
-                                        <div class="clearfix">
-                                            <label for="exampleInputPassword1" class="text-uppercase">Mật
-                                                khẩu</label>
-                                            <a class="float-right" th:href="@{/quen-mk}">Quên mật khẩu</a>
-                                        </div>
-                                        <input type="password" class="form-control" name="password" id="password"/>
+                                        <label class="text-uppercase">Email: </label>
+                                        <input id="email" type="text" autofocus="autofocus" class="form-control"
+                                               th:class="${#fields.hasErrors('email')}? 'form-control is-invalid' : 'form-control'"
+                                               th:field="*{email}"/>
+                                        <span th:if="${#fields.hasErrors('email')}"
+                                              th:errors="*{email}" class="error invalid-feedback"></span>
                                     </section>
                                     <section class="form-check">
-                                        <label class="form-check-label mt-2"> <input
-                                                type="checkbox" class="form-check-input" name="remember-me"/>
-                                            <small>Ghi nhớ đăng nhập</small>
-                                        </label>
                                         <button type="submit" class="btn btn-truyen float-right"
-                                                name="submit">Đăng nhập
+                                                name="submit">Gửi Mật Khẩu
                                         </button>
                                     </section>
-                                    <section class="form-check mt-3 text-center">
-                                        Bạn chưa có tài khoản? <a th:href="@{/dang-ky}">Đăng ký
-                                        ngay</a>
-                                    </section>
-                                    <input type="hidden" name="${_csrf.parameterName}"
-                                           value="${_csrf.token}"/>
                                 </form>
                             </section>
                             <section class="col-md-8 banner-sec pl-0 pr-0">
@@ -124,14 +109,17 @@
     </section>
     <script>
         $(document).ready(function () {
-            $("#signupForm").validate({
+            $("#rePassword").validate({
                 rules: {
                     username: "required",
-                    password: "required"
+                    email: {
+                        required: true,
+                        email: true
+                    },
                 },
                 messages: {
                     username: "Tài khoản không được để trống",
-                    password: "Mật khẩu không được để trống"
+                    email: "Email không đúng định dạng"
                 },
                 errorElement: "em",
                 errorPlacement: function (error, element) {

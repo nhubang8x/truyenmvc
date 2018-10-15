@@ -44,6 +44,11 @@ public class CategoryController {
 		model.addAttribute("information", informationService.getWebInfomation());
 	}
 
+	private void loadListTopStoryByCategory(Integer cID, Model model){
+
+
+    }
+
 	private void loadTableDataByCategory(Integer cID, Integer pagenumber, Model model) {
 //		Page<Story> page = storyService.findByCategory(Constants.CHAPTER_STATUS_APPROVED,
 //				Constants.STORY_STATUS_HIDDEN, cID, pageable);

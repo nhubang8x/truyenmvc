@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
 <head>
     <title th:text="${title}"></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -10,10 +11,8 @@
 <th:block th:include="web/layout :: loading"></th:block>
 <section class="page-wrapper">
     <th:block th:include="web/layout :: navbar"></th:block>
+    x`
     <section class="truyen-main">
-        <script type="text/javascript" sec:authorize="isAuthenticated()" `>
-            window.location = '[[@{/}]]';
-        </script>
         <div id="content" class="container">
             <div class="row">
                 <section class="login-block">
@@ -21,47 +20,52 @@
                         <section class="row truyen-login-row">
                             <section class="col-md-4 login-sec">
                                 <h2 class="text-center text-uppercase">Đăng nhập</h2>
-                                <form id="signupForm" class="login-form" name='loginForm'
-                                      th:action="@{j_spring_security_check}" method='POST'>
-                                    <section class="form-group"
-                                             th:if="${param.error} and ${session}"
-                                             th:with="errorMsg=${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">
-                                        <div class="alert alert-danger" role="alert"
-                                             th:text="${errorMsg}"></div>
-                                    </section>
-                                    <section class="form-group" th:if="${success != null}">
-                                        <div class="alert alert-success" role="alert"
-                                             th:text="${success}"></div>
+                                <form id="registerForm" class="form-horizontal" method='POST'
+                                      th:object="${user}" th:action="@{/dang-ky}">
+                                    <section class="form-group">
+                                        <label class="text-uppercase">Tài khoản: </label>
+                                        <input type="text" autofocus="autofocus" id="uName"
+                                               th:class="${#fields.hasErrors('uName')}? 'form-control is-invalid' : 'form-control'"
+                                               th:field="*{uName}"/>
+                                        <span th:if="${#fields.hasErrors('uName')}"
+                                              th:errors="*{uName}" class="invalid-feedback"></span>
                                     </section>
                                     <section class="form-group">
-                                        <label for="exampleInputEmail1" class="text-uppercase">Tài
-                                            khoản</label>
-                                        <input type="text" class="form-control" name="username"
-                                               id="username" placeholder="" autofocus="autofocus">
+                                        <label class="text-uppercase">Mật Khẩu: </label>
+                                        <input type="password" autofocus="autofocus" id="passwordRegister"
+                                               th:class="${#fields.hasErrors('passwordRegister')}? 'form-control is-invalid' : 'form-control'"
+                                               th:field="*{passwordRegister}"/>
+                                        <span th:if="${#fields.hasErrors('passwordRegister')}"
+                                              th:errors="*{passwordRegister}"
+                                              class="error invalid-feedback"></span>
                                     </section>
                                     <section class="form-group">
-                                        <div class="clearfix">
-                                            <label for="exampleInputPassword1" class="text-uppercase">Mật
-                                                khẩu</label>
-                                            <a class="float-right" th:href="@{/quen-mk}">Quên mật khẩu</a>
-                                        </div>
-                                        <input type="password" class="form-control" name="password" id="password"/>
+                                        <label class="text-uppercase">Nhập Lại Mật Khẩu: </label>
+                                        <input type="password" autofocus="autofocus" id="passwordRegisterConfirm"
+                                               th:class="${#fields.hasErrors('passwordRegisterConfirm')}? 'form-control is-invalid' : 'form-control'"
+                                               th:field="*{passwordRegisterConfirm}"/>
+                                        <span th:if="${#fields.hasErrors('passwordRegisterConfirm')}"
+                                              th:errors="*{passwordRegisterConfirm}"
+                                              class="error invalid-feedback"></span>
                                     </section>
-                                    <section class="form-check">
-                                        <label class="form-check-label mt-2"> <input
-                                                type="checkbox" class="form-check-input" name="remember-me"/>
-                                            <small>Ghi nhớ đăng nhập</small>
-                                        </label>
-                                        <button type="submit" class="btn btn-truyen float-right"
-                                                name="submit">Đăng nhập
+                                    <section class="form-group">
+                                        <label class="text-uppercase">Email: </label>
+                                        <input type="text" autofocus="autofocus" id="uEmail"
+                                            th:class="${#fields.hasErrors('uEmail')}? 'form-control is-invalid' : 'form-control'"
+                                            th:field="*{uEmail}"/>
+                                        <span th:if="${#fields.hasErrors('uEmail')}" th:errors="*{uEmail}"
+                                              class="error invalid-feedback"></span>
+                                    </section>
+                                    <section class="form-group form-check">
+                                        <label></label>
+                                        <button type="submit" class="btn btn-truyenonline float-right"
+                                                name="submit">Đăng Ký
                                         </button>
                                     </section>
-                                    <section class="form-check mt-3 text-center">
-                                        Bạn chưa có tài khoản? <a th:href="@{/dang-ky}">Đăng ký
+                                    <section class=" form-check mt-4 text-center">
+                                        Bạn đã có tài khoản? <a th:href="@{/dang-nhap}">Đăng nhập
                                         ngay</a>
                                     </section>
-                                    <input type="hidden" name="${_csrf.parameterName}"
-                                           value="${_csrf.token}"/>
                                 </form>
                             </section>
                             <section class="col-md-8 banner-sec pl-0 pr-0">
@@ -124,14 +128,35 @@
     </section>
     <script>
         $(document).ready(function () {
-            $("#signupForm").validate({
+            $("#registerForm").validate({
                 rules: {
-                    username: "required",
-                    password: "required"
+                    uName: "required",
+                    passwordRegister: {
+                        required: true,
+                        rangelength: [6, 13]
+                    },
+                    passwordRegisterConfirm: {
+                        required: true,
+                        rangelength: [6, 13],
+                        equalTo: "#passwordRegister"
+                    },
+                    uEmail: {
+                        required: true,
+                        email: true
+                    },
                 },
                 messages: {
-                    username: "Tài khoản không được để trống",
-                    password: "Mật khẩu không được để trống"
+                    uName: "Tài khoản không được để trống",
+                    passwordRegister: {
+                        required: "Password không được để trống",
+                        rangelength: "Password có độ dài từ 6-13. Phân biệt hoa thường",
+                    },
+                    passwordRegisterConfirm: {
+                        required: "Password Confirm không được để trống",
+                        rangelength: "Password Confirm có độ dài từ 6-13. Phân biệt hoa thường",
+                        equalTo: "Password Confirm không chính xác"
+                    },
+                    uEmail: "Email không đúng định dạng"
                 },
                 errorElement: "em",
                 errorPlacement: function (error, element) {
