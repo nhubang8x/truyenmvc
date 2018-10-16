@@ -1,9 +1,11 @@
 package com.apt.truyenmvc.service.impl;
 
+import com.apt.truyenmvc.entity.Role;
+import com.apt.truyenmvc.entity.Urole;
 import com.apt.truyenmvc.entity.User;
 import com.apt.truyenmvc.entity.inf.TopConverter;
-import com.apt.truyenmvc.exception.EmailTakenException;
-import com.apt.truyenmvc.exception.UsernameTakenException;
+import com.apt.truyenmvc.repository.RoleRepository;
+import com.apt.truyenmvc.repository.UroleRepository;
 import com.apt.truyenmvc.repository.UserRepository;
 import com.apt.truyenmvc.service.UserService;
 import com.apt.truyenmvc.utils.ConstantsUtils;
@@ -27,6 +29,11 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private UroleRepository uroleRepository;
+    @Autowired
+    private RoleRepository roleRepository;
+
     @Override
     public User getUserByUserName(String username) {
         return userRepository.findByUName(username);
@@ -45,8 +52,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUser(User user){
-            return userRepository.save(user);
+    public boolean registerUser(User user) {
+        User newUser = userRepository.save(user);
+        if (newUser != null) {
+            Urole uRole = new Urole();
+            uRole.setUser(newUser);
+            Role role = roleRepository.findById(ConstantsUtils.ROLE_USER).get();
+            uRole.setRole(role);
+            uroleRepository.save(uRole);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -57,5 +73,28 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean checkUserNameExits(String userName) {
         return userRepository.existsUserByUName(userName);
+    }
+
+    /**
+     * Lấy User
+     *
+     * @param userName
+     * @param email
+     * @return User
+     */
+    @Override
+    public User getForgotUser(String userName, String email) {
+        return userRepository.findByUNameAndUEmail(userName, email);
+    }
+
+    /**
+     * Cập Nhật User
+     *
+     * @param user
+     * @return User
+     */
+    @Override
+    public User updateUser(User user) {
+        return userRepository.save(user);
     }
 }

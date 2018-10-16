@@ -16,6 +16,7 @@ public class EqualFieldsValidator implements ConstraintValidator<EqualFields, Ob
     private String baseField;
     private String matchField;
     private String message;
+
     @Override
     public void initialize(EqualFields constraint) {
         baseField = constraint.baseField();

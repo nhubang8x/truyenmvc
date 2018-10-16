@@ -33,7 +33,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		User user = this.userService.getUserByUserName(userName);
 
 		if (user == null) {
-			System.out.println("Không tìm thấy user:" + userName);
 			throw new UsernameNotFoundException("User " + userName + " was not found in the database");
 		}
 

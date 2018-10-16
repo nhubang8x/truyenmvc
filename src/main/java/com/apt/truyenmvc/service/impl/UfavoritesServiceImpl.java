@@ -10,6 +10,7 @@ import com.apt.truyenmvc.service.UfavoritesService;
  *
  * @author Huy Thang
  */
+
 @Service
 public class UfavoritesServiceImpl implements UfavoritesService {
 

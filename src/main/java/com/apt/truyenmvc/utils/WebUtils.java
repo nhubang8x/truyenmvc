@@ -1,6 +1,7 @@
 package com.apt.truyenmvc.utils;
 
 import java.util.Collection;
+import java.util.Random;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -47,4 +48,24 @@ public class WebUtils {
 		return true;
 	}
 
+    public static int getRandomNumber() {
+        int randomInt = 0;
+        Random randomGenerator = new Random();
+        randomInt = randomGenerator.nextInt(ConstantsUtils.CHAR_LIST.length());
+        if (randomInt - 1 == -1) {
+            return randomInt;
+        } else {
+            return randomInt - 1;
+        }
+    }
+
+    public static String randomPassword() {
+        StringBuffer randStr = new StringBuffer();
+        for (int i = 0; i < ConstantsUtils.RANDOM_STRING_LENGTH; i++) {
+            int number = getRandomNumber();
+            char ch = ConstantsUtils.CHAR_LIST.charAt(number);
+            randStr.append(ch);
+        }
+        return randStr.toString();
+    }
 }

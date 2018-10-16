@@ -17,7 +17,7 @@ import java.lang.annotation.*;
 @Documented
 public @interface UniqueUserName {
 
-    String message() default "{hthang.truyenmvc.uName.UniqueUserName.message}";
+    String message() default "{hthang.truyenmvc.user.uName.UniqueUserName.message}";
 
     Class<?>[] groups() default {};
 

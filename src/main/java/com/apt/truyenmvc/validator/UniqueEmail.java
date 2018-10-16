@@ -17,7 +17,7 @@ import java.lang.annotation.*;
 @Documented
 public @interface UniqueEmail {
 
-    String message() default "{hthang.truyenmvc.uEmail.UniqueEmail.message}";
+    String message() default "{hthang.truyenmvc.user.uEmail.UniqueEmail.message}";
 
     Class<?>[] groups() default {};
 

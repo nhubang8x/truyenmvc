@@ -34,9 +34,9 @@ public interface UserService {
      *
      * @param user
      *
-     * @return User
+     * @return boolean
      */
-	public User updateUser(User user);
+	public boolean registerUser(User user);
 
     /**
      * Kiểm tra Email đã tồn tại chưa
@@ -55,4 +55,23 @@ public interface UserService {
      * @return boolean
      */
     public boolean checkUserNameExits(String userName);
+
+    /**
+     * Lấy User
+     *
+     * @param userName
+     * @param email
+     *
+     * @return User
+     */
+    public User getForgotUser(String userName, String email);
+
+    /**
+     * Cập Nhật User
+     *
+     * @param user
+     *
+     * @return User
+     */
+    public User updateUser(User user);
 }

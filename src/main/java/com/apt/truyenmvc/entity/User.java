@@ -32,7 +32,7 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "uID", unique = true, nullable = false)
     private Long uID;
-    @NotEmpty(message = "{hthang.truyenmvc.uName.empty.message}")
+    @NotEmpty(message = "{hthang.truyenmvc.user.uName.empty.message}")
     @UniqueUserName
     @Column(name = "uName", unique = true, nullable = false, length = 30)
     private String uName;
@@ -40,9 +40,9 @@ public class User implements Serializable {
     private String uPass;
     @Column(name = "uDname", unique = true)
     private String uDname;
-    @NotEmpty(message = "{hthang.truyenmvc.uEmail.empty.message}")
-    @Email(message = "{hthang.truyenmvc.uEmail.email.message}")
-//    @UniqueEmail
+    @NotEmpty(message = "{hthang.truyenmvc.user.uEmail.empty.message}")
+    @Email(message = "{hthang.truyenmvc.user.uEmail.email.message}")
+    @UniqueEmail
     @Column(name = "uEmail", unique = true, nullable = false, length = 150)
     private String uEmail;
     @Column(name = "gold", precision = 22, scale = 0)
@@ -61,16 +61,12 @@ public class User implements Serializable {
     private Integer uStatus;
 
     @Transient
-    @Size(min = 6, max = 13, message = "{hthang.truyenmvc.passwordRegister.size.message}")
+    @Size(min = 6, max = 13, message = "{hthang.truyenmvc.user.passwordRegister.size.message}")
     private String passwordRegister;
 
     @Transient
-    @Size(min = 6, max = 13, message = "{hthang.truyenmvc.passwordRegisterConfirm.size.message}")
+    @Size(min = 6, max = 13, message = "{hthang.truyenmvc.user.passwordRegisterConfirm.size.message}")
     private String passwordRegisterConfirm;
-
-    @Transient
-    @Size(min = 6, max = 13, message = "{hthang.truyenmvc.passwordRegisterConfirm.size.message}")
-    private String passwordRegisterConfirm3;
 
     @PrePersist
     public void prePersist() {

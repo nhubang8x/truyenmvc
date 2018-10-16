@@ -13,20 +13,28 @@ import javax.validation.ConstraintValidatorContext;
  */
 public class UniqueUserNameValidator implements ConstraintValidator<UniqueUserName, String> {
 
-    private final UserService userServicel;
-
     @Autowired
-    public UniqueUserNameValidator(UserService userServicel) {
-        this.userServicel = userServicel;
-    }
+    private UserService userServicel;
+
+    private String message;
 
     @Override
     public void initialize(UniqueUserName constraintAnnotation) {
-
+        message = constraintAnnotation.message();
     }
 
     @Override
     public boolean isValid(String userName, ConstraintValidatorContext constraintValidatorContext) {
-        return userName != null && !userServicel.checkUserNameExits(userName);
+        boolean valid = true;
+        try {
+            valid = userName != null && !userServicel.checkUserNameExits(userName);
+        } catch (Exception e) {
+        }
+        if (!valid) {
+            constraintValidatorContext.buildConstraintViolationWithTemplate(message)
+                    .addConstraintViolation()
+                    .disableDefaultConstraintViolation();
+        }
+        return valid;
     }
 }

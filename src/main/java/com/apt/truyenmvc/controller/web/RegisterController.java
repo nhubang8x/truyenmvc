@@ -3,12 +3,12 @@ package com.apt.truyenmvc.controller.web;
 import com.apt.truyenmvc.entity.User;
 import com.apt.truyenmvc.service.CategoryService;
 import com.apt.truyenmvc.service.InformationService;
-import com.apt.truyenmvc.service.UroleService;
+import com.apt.truyenmvc.service.SecurityService;
 import com.apt.truyenmvc.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -32,17 +32,21 @@ import javax.validation.Valid;
 public class RegisterController {
 
     Logger logger = LoggerFactory.getLogger(RegisterController.class);
-    @Autowired
-    private InformationService informationService;
-    @Autowired
-    private CategoryService categoryService;
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private UroleService uroleService;
+
+    @Value("${hthang.truyenmvc.title.register}")
+    private String titleRegister;
 
     @Autowired
-    private MessageSource messageSource;
+    private InformationService informationService;
+
+    @Autowired
+    private CategoryService categoryService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private SecurityService securityService;
 
     private void getMenuAndInfo(Model model, String title) {
 
@@ -60,7 +64,7 @@ public class RegisterController {
     public String showRegisterForm(final Model model) {
         logger.info("Get Dang ky");
         // Lấy List Category Menu
-        getMenuAndInfo(model, "Đăng Ký | Truyện Online | Vietphrase");
+        getMenuAndInfo(model, titleRegister);
 
         model.addAttribute("user", new User());
         return "web/dangky";
@@ -70,17 +74,20 @@ public class RegisterController {
     public String register(@Valid User user, BindingResult result, Model model, HttpServletRequest request) {
         boolean hasError = result.hasErrors();
         if (hasError) {
-            getMenuAndInfo(model, "Đăng Ký | Truyện Online | Vietphrase");
-
+            getMenuAndInfo(model, titleRegister);
             model.addAttribute("user", user);
             return "web/dangky";
         }
-        if (!hasError) {
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            user.setUPass(passwordEncoder.encode(user.getPasswordRegister()));
-            user.setUDname(user.getUName());
-            userService.updateUser(user);
-        }
+
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        user.setUPass(passwordEncoder.encode(user.getPasswordRegister()));
+        user.setUDname(user.getUName());
+
+        //Lưu Người dùng đăng ký trong database
+        userService.registerUser(user);
+
+        //Đăng nhập sau khi đăng ký thành công
+        securityService.autologin(user.getUName(), user.getPasswordRegisterConfirm(), request);
 
         return "redirect:/";
     }

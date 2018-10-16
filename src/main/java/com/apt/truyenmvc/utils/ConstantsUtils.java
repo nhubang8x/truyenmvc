@@ -28,9 +28,18 @@ public class ConstantsUtils {
 	public static int PAGE_DEFAULT = 1;
 	
 	public static int RANK_SIZE = 10;
-	
-	public static int ROLE_CONVERTER = 2;
+
+    public static int ROLE_ADMIN = 1;
+
+    public static int ROLE_SMOD = 2;
+
+	public static int ROLE_CONVERTER = 3;
+
+    public static int ROLE_USER = 4;
 
 	public static String AVATAR_DEFAULT = "https://res.cloudinary.com/thang1988/image/upload/v1539181299/logo.png";
-	
+
+    public static final String CHAR_LIST = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+
+    public static final int RANDOM_STRING_LENGTH = 6;
 }

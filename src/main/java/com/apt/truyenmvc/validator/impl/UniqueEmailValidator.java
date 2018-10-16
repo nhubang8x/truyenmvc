@@ -14,20 +14,29 @@ import javax.validation.ConstraintValidatorContext;
 
 public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, String> {
 
+    @Autowired
     private UserService userService;
 
-    @Autowired
-    public UniqueEmailValidator(UserService userService) {
-        this.userService = userService;
-    }
+    private String message;
 
     @Override
     public void initialize(UniqueEmail constraintAnnotation) {
-
+        message = constraintAnnotation.message();
     }
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext constraintValidatorContext) {
-        return email != null && !userService.checkEmailExits(email) ;
+        boolean valid = true;
+        try {
+            valid = email != null && !userService.checkEmailExits(email);
+        } catch (Exception e) {
+
+        }
+        if (!valid) {
+            constraintValidatorContext.buildConstraintViolationWithTemplate(message)
+                    .addConstraintViolation()
+                    .disableDefaultConstraintViolation();
+        }
+        return valid;
     }
 }

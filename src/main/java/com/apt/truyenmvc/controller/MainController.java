@@ -93,10 +93,6 @@ public class MainController {
 		if (principal != null) {
 			MyUserDetails loginedUser = (MyUserDetails) ((Authentication) principal).getPrincipal();
 			loginedUser.getUser().getUID();
-//
-//			String userInfo = com.apt.truyenmvc.utils.WebUtils.toString(loginedUser);
-//
-//			model.addAttribute("userInfo", userInfo);
 
 			String message = "Hi " + principal.getName() //
 					+ "<br> You do not have permission to access this page!";
