@@ -19,14 +19,20 @@ public class ConstantsUtils {
 	public static Integer STORY_STATUS_COMPLETED = 2;
 	//Trạng thái truyện chờ duyệt
 	public static Integer STORY_STATUS_WAIT_APPROVAL = 3;
-	
+
+    // Size Swapper
+    public static int PAGE_SIZE_SWAPPER = 5;
+
 	//Số Story Trong Home Page
 	public static int PAGE_SIZE_HOME = 18;
-	
-	public static int PAGE_SIZE = 20;
-	
+
+	// Số Story Default
+	public static int PAGE_SIZE_DEFAULT = 20;
+
+	// Page Default
 	public static int PAGE_DEFAULT = 1;
-	
+
+
 	public static int RANK_SIZE = 10;
 
     public static int ROLE_ADMIN = 1;
@@ -42,4 +48,6 @@ public class ConstantsUtils {
     public static final String CHAR_LIST = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
     public static final int RANDOM_STRING_LENGTH = 6;
+
+
 }

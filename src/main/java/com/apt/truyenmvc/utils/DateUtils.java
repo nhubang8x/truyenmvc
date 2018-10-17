@@ -1,7 +1,6 @@
 package com.apt.truyenmvc.utils;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
+import java.time.*;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -42,5 +41,29 @@ public class DateUtils {
 
     public static Date getCurrentDate() {
         return Calendar.getInstance().getTime();
+    }
+
+    public static String betweenTwoDays(Date createDate) {
+        LocalDateTime startDate = createDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+        LocalDate startLocalDate = createDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDateTime endDate = getCurrentDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+        LocalDate endLocalDate = getCurrentDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        long differentInSeconds = Duration.between(startDate, endDate).getSeconds();
+        long differentInMinutes = Duration.between(startDate, endDate).toMinutes();
+        long differentInHours = Duration.between(startDate, endDate).toHours();
+        long differentInDays = Period.between(startLocalDate, endLocalDate).getDays();
+        long differentInMonths = Period.between(startLocalDate, endLocalDate).getMonths();
+        long differentInYears = Period.between(startLocalDate, endLocalDate).getYears();
+        if (differentInYears > 0)
+            return differentInYears + " năm";
+        if (differentInMonths > 0)
+            return differentInMonths + " tháng";
+        if (differentInDays > 0)
+            return differentInDays + " ngày";
+        if (differentInHours > 0)
+            return differentInHours + " giờ";
+        if (differentInMinutes > 0)
+            return differentInMinutes + " phút";
+        return differentInSeconds + " giây";
     }
 }

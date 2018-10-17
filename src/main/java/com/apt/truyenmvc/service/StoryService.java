@@ -16,8 +16,6 @@ import com.apt.truyenmvc.entity.inf.TopStory;
  */
 public interface StoryService {
 
-	public Page<Story> getUpdateStoryInHome(int page, int size);
-
 	/**
 	 * Lấy List Truyện Mới Cập Nhật
 	 * 
@@ -26,7 +24,17 @@ public interface StoryService {
 	 * 
 	 * @return Page<NewStory>
 	 */
-	public Page<NewStory> getStoryNew(int page, int size);
+    Page<NewStory> getStoryNew(int page, int size);
+
+    /**
+     * Lấy List Truyện Vip Mới Cập Nhật
+     *
+     * @param page
+     * @param size
+     *
+     * @return Page<NewStory>
+     */
+    Page<NewStory> getVipStoryNew(int page, int size);
 
 	/**
 	 * Lấy List Truyện Mới Cập Nhật theo Category
@@ -37,7 +45,7 @@ public interface StoryService {
 	 * 
 	 * @return Page<NewStory>
 	 */
-	public Page<NewStory> getStoryNewByCID(Integer cID, int page, int size);
+    Page<NewStory> getStoryNewByCID(Integer cID, int page, int size);
 
 	/**
 	 * Lấy List Truyện Top View Trong Tuần
@@ -49,7 +57,7 @@ public interface StoryService {
 	 * 
 	 * @return Page<TopStory>
 	 */
-	public Page<TopStory> getTopStory(Date startDate, Date endDate, int page, int size);
+    Page<TopStory> getTopStory(Date startDate, Date endDate, int page, int size);
 	
 	/**
 	 * Lấy List Truyện Vip Top Deal Trong Tuần
@@ -61,12 +69,29 @@ public interface StoryService {
 	 * 
 	 * @return Page<TopStory>
 	 */
-	public Page<TopStory> getTopStoryVip(Date startDate, Date endDate, int page, int size);
+    Page<TopStory> getTopStoryVip(Date startDate, Date endDate, int page, int size);
 	
 	/**
-	 * Lấy List Truyện Mới hoàn thành
+	 * Lấy Top 10 Truyện Mới hoàn thành
 	 * 
 	 * @return List<Story>
 	 */
-	public List<Story> getNewStoryCompleted() ;
+    List<Story> getNewStoryCompleted() ;
+
+    /**
+     * Lấy Page Truyện Hoàn Thành
+     *
+     * @param page
+     * @param size
+     *
+     * @return Page<NewStory>
+     */
+    Page<NewStory> getStoryCompletedByPage(int page, int size);
+
+    /**
+     * Lấy List Truyện Hoàn Thành Top View Trong Tháng
+     *
+     * @return List<Story>
+     */
+    List<Story> getCompleteStorySwapper();
 }

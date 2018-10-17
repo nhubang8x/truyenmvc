@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+>
 <head>
     <title th:text="${title}"></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -12,116 +12,165 @@
 <section class="page-wrapper">
     <th:block th:include="web/layout :: navbar"></th:block>
     <section class="truyen-main">
-        <script type="text/javascript" sec:authorize="isAuthenticated()"`>
-            window.location = '[[@{/}]]';
-        </script>
-        <div id="content" class="container">
-            <div class="row">
-                <section class="login-block">
-                    <section class="container">
-                        <section class="row truyen-login-row">
-                            <section class="col-md-4 login-sec">
-                                <h2 class="text-center text-uppercase">Đăng nhập</h2>
-                                <form class="login-form" name='loginForm'
-                                      th:action="@{j_spring_security_check}" method='POST'>
-                                    <section class="form-group"
-                                             th:if="${param.error} and ${session}"
-                                             th:with="errorMsg=${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">
-                                        <div class="alert alert-danger" role="alert"
-                                             th:text="${errorMsg}"></div>
-                                    </section>
-                                    <section class="form-group" th:if="${success != null}">
-                                        <div class="alert alert-success" role="alert"
-                                             th:text="${success}"></div>
-                                    </section>
-                                    <section class="form-group">
-                                        <label for="exampleInputEmail1" class="text-uppercase">Tài
-                                            khoản</label> <input type="text" class="form-control" name="username"
-                                                                 id="username" placeholder="" th:required="required"
-                                                                 autofocus="autofocus">
-                                    </section>
-                                    <section class="form-group">
-                                        <div class="clearfix">
-                                            <label for="exampleInputPassword1" class="text-uppercase">Mật
-                                                khẩu</label> <a class="float-right" th:href="@{/quen-mk}">Quên
-                                            mật khẩu</a>
-                                        </div>
-                                        <input type="password" class="form-control" name='password'
-                                               th:required="required" />
-                                    </section>
-                                    <section class="form-check">
-                                        <label class="form-check-label mt-2"> <input
-                                                type="checkbox" class="form-check-input" name="remember-me" />
-                                            <small>Ghi nhớ đăng nhập</small>
-                                        </label>
-                                        <button type="submit" class="btn btn-truyen float-right"
-                                                name="submit">Đăng nhập</button>
-                                    </section>
-                                    <section class="form-check mt-3 text-center">
-                                        Bạn chưa có tài khoản? <a th:href="@{/dang-ky}">Đăng ký
-                                        ngay</a>
-                                    </section>
-                                    <input type="hidden" name="${_csrf.parameterName}"
-                                           value="${_csrf.token}" />
-                                </form>
-                            </section>
-                            <section class="col-md-8 banner-sec pl-0 pr-0">
-                                <section id="carouselExampleIndicators" class="carousel slide"
-                                         data-ride="carousel">
-                                    <ol class="carousel-indicators">
-                                        <li data-target="#carouselExampleIndicators" data-slide-to="0"
-                                            class="active"></li>
-                                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                                    </ol>
-                                    <section class="carousel-inner" role="listbox">
-                                        <section class="carousel-item active">
-                                            <img class="d-block img-fluid"
-                                                 th:src="@{images/login-slide-1.jpg}" alt="First slide">
-                                            <section class="carousel-caption d-none d-md-block">
-                                                <section class="banner-text">
-                                                    <h2>This is Heaven</h2>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                        elit, sed do eiusmod tempor incididunt ut labore et dolore
-                                                        magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                                        exercitation</p>
-                                                </section>
-                                            </section>
-                                        </section>
-                                        <section class="carousel-item">
-                                            <img class="d-block img-fluid"
-                                                 th:src="@{images/login-slide-2.jpg}" alt="First slide">
-                                            <section class="carousel-caption d-none d-md-block">
-                                                <section class="banner-text">
-                                                    <h2>This is Heaven</h2>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                        elit, sed do eiusmod tempor incididunt ut labore et dolore
-                                                        magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                                        exercitation</p>
-                                                </section>
-                                            </section>
-                                        </section>
-                                        <section class="carousel-item">
-                                            <img class="d-block img-fluid"
-                                                 th:src="@{images/login-slide-3.jpg}" alt="First slide">
-                                            <section class="carousel-caption d-none d-md-block">
-                                                <section class="banner-text">
-                                                    <h2>This is Heaven</h2>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                        elit, sed do eiusmod tempor incididunt ut labore et dolore
-                                                        magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                                        exercitation</p>
-                                                </section>
-                                            </section>
-                                        </section>
-                                    </section>
-                                </section>
-                            </section>
-                        </section>
-                    </section>
+
+        <section id="content" class="container mb-4">
+            <section class="featured-content p-0 section-featured">
+                <section class="row"
+                         th:if="${(listStory ==null || listStory.empty) && (topview ==null || topview.empty)}">
+                    <div class="col-12">
+                        <div class="alert alert-success text-center m-md-5  m-xs-0"
+                             role="alert" style="font-size: 20px">
+                            <h4 class="alert-heading"><i class="far fa-bell fa-3x "></i></h4>
+                            <p>Chưa có truyện nào thuộc thể loại này!</p>
+                            <hr>
+                            <p>
+                                <a th:href="@{/}" class="alert-link"> Quay lại Trang chủ</a>
+                            </p>
+                        </div>
+                    </div>
                 </section>
-            </div>
-        </div>
+                <section class="row"
+                         th:unless="${(listStory ==null && listStory.empty) || (topview ==null && topview.empty)}">
+                    <div class="col-xs-12 col-sm-12 col-md-8">
+                        <div class="block block-default block-list-new">
+                            <div class="block-header">
+                                <h2 class="title text-uppercase"
+                                    th:text="${title}"></h2>
+                            </div>
+                            <div class="block-content" id="dataTable">
+                                <ul class="list-group">
+                                    <li class="list-group-item list-group-item-table"
+                                        th:each="story : ${listStory}">
+                                        <div class="content">
+                                            <a class="thumb"
+                                               th:href="@{'/truyen/'+${story.sID}+'/'+${story.sMetaTitle}}">
+                                                <img class="img-responsive"
+                                                     th:src="@{${story.sImages}}"
+                                                     th:alt="${story.vnName}">
+                                            </a>
+                                            <div class="info">
+                                                <h2 class="title">
+                                                    <a th:href="@{'/truyen/'+${story.sID}+'/'+${story.sMetaTitle}}"
+                                                       th:title="${story.vnName}"
+                                                       th:text="${story.vnName}"></a>
+                                                </h2>
+                                                <div class="chap" th:text="${story.sAuthor}"></div>
+                                                <div class="author">
+                                                    <a th:href="@{'/truyen/'+${story.sID}+'/'+${story.sMetaTitle}+'/'+${story.chID}}"
+                                                       th:title="'Chương ' + ${chapter.chNumber}"
+                                                       th:text="'Chương '+ ${chapter.chNumber}"></a>
+                                                </div>
+                                                <div class="time"
+                                                     th:text="${T(com.apt.truyenmvc.utils.DateUtils).betweenTwoDays(story.sUpdate)} + ' trước'"></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div th:if="${totalIndex > 1}">
+                                    <ul class="pagination justify-content-end">
+                                        <li th:if="${currentIndex == 1}" class="page-item disabled"><a
+                                                class="page-link">«</a></li>
+                                        <li th:unless="${currentIndex == 1}" class="page-item"><a
+                                                class="page-link"
+                                                th:href="@{'/the-loai/' + ${category.cid} + '/'${category.cmetaTitle} + '/trang-1'}">«</a>
+                                        </li>
+                                        <th:block
+                                                th:each="i : ${#numbers.sequence( beginIndex, endIndex)}">
+                                            <li class="page-item active" th:if="${i == currentIndex}"><a
+                                                    class="page-link"
+                                                    th:href="@{'/the-loai/' + ${category.cid} + '/'${category.cmetaTitle} + '/trang-'+${i}"
+                                                    th:text="${i}"></a></li>
+                                            <li class="page-item" th:unless="${i == currentIndex}"><a
+                                                    class="page-link"
+                                                    th:href="@{'/the-loai/' + ${category.cid} + '/'${category.cmetaTitle} + '/trang-'+${i}"
+                                                    th:text="${i}"></a></li>
+                                        </th:block>
+                                        <li th:if="${currentIndex == totalIndex}}"
+                                            class="page-item disabled"><a class="page-link">«</a></li>
+                                        <li th:unless="${currentIndex == totalIndex}}"
+                                            class="page-item"><a class="page-link"
+                                                                 th:href="@{'/the-loai/' + ${category.cid} + '/'${category.cmetaTitle} + '/trang-'+${totalIndex}}}">«</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <div class="block block-editors-choice-slider">
+                            <div class="block-content">
+                                <div class="editors-choice-slider js-editors-choice-slider">
+                                    <h2>ĐỌC NHIỀU</h2>
+                                    <div class="swiper-container swiper-container-horizontal">
+                                        <div class="swiper-wrapper"
+                                             style="transform: translate3d(-1128px, 0px, 0px); transition-duration: 0ms;">
+                                            <div class="swiper-slide"
+                                                 style="width: 346px; margin-right: 30px;"
+                                                 th:each="topstory : ${topview}">
+                                                <div class="item">
+                                                    <div class="thumb">
+                                                        <a
+                                                                th:href="@{'/truyen/'+${topstory.sid}+'/'+${topstory.smetaTitle}}"
+                                                                th:title="${topstory.vnName}"> <img
+                                                                class="img-responsive" alt=""
+                                                                th:src="@{'/upload/'+${topstory.savatar}}"
+                                                                th:title="${topstory.vnName}">
+                                                        </a>
+                                                    </div>
+                                                    <div class="info" style="">
+                                                        <h2 class="title">
+                                                            <a
+                                                                    th:href="@{'/truyen/'+${topstory.sid}+'/'+${topstory.smetaTitle}}"
+                                                                    th:title="${topstory.vnName}"
+                                                                    th:text="${topstory.vnName}"></a>
+                                                        </h2>
+                                                        <p class="description text-center"
+                                                           th:text="${topstory.sinfo}"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                                class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+                                            <span class="swiper-pagination-bullet"></span> <span
+                                                class="swiper-pagination-bullet"></span> <span
+                                                class="swiper-pagination-bullet"></span> <span
+                                                class="swiper-pagination-bullet swiper-pagination-bullet-active"></span>
+                                            <span class="swiper-pagination-bullet"></span>
+                                        </div>
+                                    </div>
+                                    <script>
+                                        $(document).ready(function () {
+                                            var $container = $('.js-editors-choice-slider'), $slider, swiper;
+                                            $slider = $container.find('.swiper-container');
+                                            swiper = new Swiper($slider, {
+                                                pagination: {
+                                                    el: $slider
+                                                        .find('.swiper-pagination'),
+                                                    clickable: true,
+                                                },
+                                                navigation: {
+                                                    nextEl: $slider
+                                                        .find('.swiper-button-next'),
+                                                    prevEl: $slider
+                                                        .find('.swiper-button-prev'),
+                                                },
+                                                spaceBetween: 30,
+                                                slidesPerView: 1,
+                                                autoplay: {
+                                                    delay: 500000000000,
+                                                    disableOnInteraction: false,
+                                                },
+                                            });
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </section>
     </section>
     <th:block th:include="web/layout :: footer"></th:block>
 </section>

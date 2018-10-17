@@ -21,6 +21,18 @@ public class ConstansQueryUtils {
 			+ " WHERE s.sStatus IN :sStatus" 
 			+ " ORDER BY s.sUpdate DESC";
 
+    public static final String COUNT_STORY_NEW_UPDATE = "SELECT COUNT(*)"
+            + " FROM Story s LEFT JOIN (SELECT c.* FROM Chapter c INNER JOIN"
+            + " (SELECT MAX(c.chID) AS chapterID FROM Story s"
+            + " LEFT JOIN Chapter c"
+            + " ON s.sID = c.sID GROUP BY s.sID) d"
+            + " ON c.chID = d.chapterID "
+            + " WHERE c.chStatus = :chStatus) c "
+            + " ON s.sID = c.sID "
+            + " LEFT JOIN user u on c.uID = u.uID"
+            + " WHERE s.sStatus IN :sStatus"
+            + " ORDER BY s.sUpdate DESC";
+
 	public static final String STORY_NEW_UPDATE_BY_CATEGORY = "SELECT s.sID, s.vnName, s.sImages, s.sAuthor, s.sMetaTitle, s.sUpdate, c.chID, c.chNumber, u.uName, u.uDname"
 			+ " FROM Story s LEFT JOIN (SELECT c.* FROM Chapter c INNER JOIN"
 			+ " (SELECT MAX(c.chID) AS chapterID FROM Story s"
@@ -33,31 +45,43 @@ public class ConstansQueryUtils {
 			+ " LEFT JOIN `_scategory` sc on s.sID = sc.sID"
 			+ " WHERE  sc.cID = :cID AND s.sStatus IN :sStatus" 
 			+ " ORDER BY s.sUpdate DESC";
-	
-	public static final String COUNT_STORY_NEW_UPDATE = "SELECT COUNT(*)"
-			+ " FROM Story s LEFT JOIN (SELECT c.* FROM Chapter c INNER JOIN"
-			+ " (SELECT MAX(c.chID) AS chapterID FROM Story s"
-			+ " LEFT JOIN Chapter c"
-			+ " ON s.sID = c.sID GROUP BY s.sID) d"
-			+ " ON c.chID = d.chapterID "
-			+ " WHERE c.chStatus = :chStatus) c "
-			+ " ON s.sID = c.sID "
-			+ " LEFT JOIN user u on c.uID = u.uID"
-			+ " WHERE s.sStatus IN :sStatus" 
-			+ " ORDER BY s.sUpdate DESC";
-	
-	public static final String COUNT_STORY_NEW_UPDATE_BY_CATEGORY = "SELECT COUNT(*)"
-			+ " FROM Story s LEFT JOIN (SELECT c.* FROM Chapter c INNER JOIN"
-			+ " (SELECT MAX(c.chID) AS chapterID FROM Story s"
-			+ " LEFT JOIN Chapter c"
-			+ " ON s.sID = c.sID GROUP BY s.sID) d"
-			+ " ON c.chID = d.chapterID "
-			+ " WHERE c.chStatus = :chStatus) c "
-			+ " ON s.sID = c.sID "
-			+ " LEFT JOIN user u on c.uID = u.uID"
-			+ " LEFT JOIN `_scategory` sc on s.sID = sc.sID"
-			+ " WHERE  sc.cID = :cID AND s.sStatus IN :sStatus" 
-			+ " ORDER BY s.sUpdate DESC";
+
+    public static final String COUNT_STORY_NEW_UPDATE_BY_CATEGORY = "SELECT COUNT(*)"
+            + " FROM Story s LEFT JOIN (SELECT c.* FROM Chapter c INNER JOIN"
+            + " (SELECT MAX(c.chID) AS chapterID FROM Story s"
+            + " LEFT JOIN Chapter c"
+            + " ON s.sID = c.sID GROUP BY s.sID) d"
+            + " ON c.chID = d.chapterID "
+            + " WHERE c.chStatus = :chStatus) c "
+            + " ON s.sID = c.sID "
+            + " LEFT JOIN user u on c.uID = u.uID"
+            + " LEFT JOIN `_scategory` sc on s.sID = sc.sID"
+            + " WHERE  sc.cID = :cID AND s.sStatus IN :sStatus"
+            + " ORDER BY s.sUpdate DESC";
+
+    public static final String VIP_STORY_NEW_UPDATE = "SELECT s.sID, s.vnName, s.sImages, s.sAuthor, s.sMetaTitle, s.sUpdate, c.chID, c.chNumber, u.uName, u.uDname"
+            + " FROM Story s LEFT JOIN (SELECT c.* FROM Chapter c INNER JOIN"
+            + " (SELECT MAX(c.chID) AS chapterID FROM Story s"
+            + " LEFT JOIN Chapter c"
+            + " ON s.sID = c.sID GROUP BY s.sID) d"
+            + " ON c.chID = d.chapterID "
+            + " WHERE c.chStatus = :chStatus) c "
+            + " ON s.sID = c.sID "
+            + " LEFT JOIN user u on c.uID = u.uID"
+            + " WHERE s.sStatus IN :sStatus AND sDealStatus = :sDealStatus"
+            + " ORDER BY s.sUpdate DESC";
+
+    public static final String COUNT_VIP_STORY_NEW_UPDATE = "SELECT COUNT(*)"
+            + " FROM Story s LEFT JOIN (SELECT c.* FROM Chapter c INNER JOIN"
+            + " (SELECT MAX(c.chID) AS chapterID FROM Story s"
+            + " LEFT JOIN Chapter c"
+            + " ON s.sID = c.sID GROUP BY s.sID) d"
+            + " ON c.chID = d.chapterID "
+            + " WHERE c.chStatus = :chStatus) c "
+            + " ON s.sID = c.sID "
+            + " LEFT JOIN user u on c.uID = u.uID"
+            + " WHERE s.sStatus IN :sStatus AND sDealStatus = :sDealStatus"
+            + " ORDER BY s.sUpdate DESC";
 	
 	public static final String STORY_TOP_VIEW = "SELECT s.sID, s.vnName, s.sImages, s.sAuthor, s.sMetaTitle, COALESCE(d.countView,0) AS cnt, ca.cID, ca.cName FROM Story s"
 			+ " LEFT JOIN (SELECT c.sID, COUNT(c.sID) AS countView FROM Chapter c"
@@ -95,7 +119,6 @@ public class ConstansQueryUtils {
 			+ " LEFT JOIN `_scategory` sc on s.sID = sc.sID"
 			+ " LEFT JOIN Category ca on sc.cID = ca.cID"
 			+ " WHERE  s.sStatus IN :sStatus AND sc.cID = :cID"
-			+ " GROUP BY ca.cID"
 			+ " ORDER BY cnt DESC, s.sView DESC";
 
 	public static final String COUNT_STORY_TOP_VIEW_BY_CATEGORY = "SELECT COUNT(*) FROM (SELECT s.sID, COALESCE(d.countView,0) AS cnt FROM Story s"
@@ -108,7 +131,6 @@ public class ConstansQueryUtils {
 			+ " LEFT JOIN `_scategory` sc on s.sID = sc.sID"
 			+ " LEFT JOIN Category ca on sc.cID = ca.cID"
 			+ " WHERE  s.sStatus IN :sStatus AND sc.cID = :cID"
-			+ " GROUP BY ca.cID"
 			+ " ORDER BY cnt DESC, s.sView DESC) rs";
 	
 	public static final String STORY_VIP_TOP_VIEW = "SELECT s.sID, s.vnName, s.sImages, s.sAuthor, s.sMetaTitle, g.cnt FROM Story s"
@@ -150,4 +172,47 @@ public class ConstansQueryUtils {
             + " WHERE S.sStatus != :sStatus"
             + " ORDER BY s.sUpdate DESC";
 
+    public static final String STORY_COMPLETE= "SELECT s.sID, s.vnName, s.sImages, s.sAuthor, s.sMetaTitle, s.sUpdate, c.chID, c.chNumber, u.uName, u.uDname"
+            + " FROM Story s LEFT JOIN (SELECT c.* FROM Chapter c INNER JOIN"
+            + " (SELECT MAX(c.chID) AS chapterID FROM Story s"
+            + " LEFT JOIN Chapter c"
+            + " ON s.sID = c.sID GROUP BY s.sID) d"
+            + " ON c.chID = d.chapterID "
+            + " WHERE c.chStatus = :chStatus) c "
+            + " ON s.sID = c.sID "
+            + " LEFT JOIN user u on c.uID = u.uID"
+            + " WHERE s.sStatus = :sStatus"
+            + " ORDER BY s.sUpdate DESC";
+
+    public static final String COUNT_STORY_COMPLETE = "SELECT COUNT(*)"
+            + " FROM Story s LEFT JOIN (SELECT c.* FROM Chapter c INNER JOIN"
+            + " (SELECT MAX(c.chID) AS chapterID FROM Story s"
+            + " LEFT JOIN Chapter c"
+            + " ON s.sID = c.sID GROUP BY s.sID) d"
+            + " ON c.chID = d.chapterID "
+            + " WHERE c.chStatus = :chStatus) c "
+            + " ON s.sID = c.sID "
+            + " LEFT JOIN user u on c.uID = u.uID"
+            + " WHERE s.sStatus = :sStatus"
+            + " ORDER BY s.sUpdate DESC";
+
+    public static final String COMPLETE_STORY_TOP_VIEW_SWAPPER = "SELECT s.* FROM Story s"
+            + " LEFT JOIN (SELECT c.sID, COUNT(c.sID) AS countView FROM Chapter c"
+            + " LEFT JOIN `_ufavorites` u ON  c.chID = u.chID"
+            + " LEFT JOIN Story st on c.sID = st.sID"
+            + " WHERE st.sStatus = :sStatus"
+            + " AND u.dateView BETWEEN :startDate AND :endDate"
+            + " GROUP BY c.sID) d ON s.sID = d.sID"
+            + " WHERE  s.sStatus = :sStatus"
+            + " ORDER BY COALESCE(d.countView,0) DESC, s.sView DESC";
+
+    public static final String COUNT_COMPLETE_STORY_TOP_VIEW_SWAPPER = "SELECT COUNT(*) FROM (SELECT s.* FROM Story s"
+            + " LEFT JOIN (SELECT c.sID, COUNT(c.sID) AS countView FROM Chapter c"
+            + " LEFT JOIN `_ufavorites` u ON  c.chID = u.chID"
+            + " LEFT JOIN Story st on c.sID = st.sID"
+            + " WHERE st.sStatus = :sStatus"
+            + " AND u.dateView BETWEEN :startDate AND :endDate"
+            + " GROUP BY c.sID) d ON s.sID = d.sID"
+            + " WHERE  s.sStatus = :sStatus"
+            + " ORDER BY COALESCE(d.countView,0) DESC, s.sView DESC) rs";
 }
